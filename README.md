@@ -1,15 +1,16 @@
 # Terra Magna Project
 
 Este projeto é uma aplicação fullstack containerizada, composta por:
-- **Frontend:** Angular (servido via Nginx)
-- **Backend:** Node.js
-- **Banco de Dados:** PostgreSQL
+- **Frontend:** Angular (Executado localmente)
+- **Backend:** Node.js (Docker)
+- **Banco de Dados:** PostgreSQL (Docker)
 
 ## Pré-requisitos
 
 Certifique-se de ter instalado em sua máquina:
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+- [Node.js](https://nodejs.org/) (22 LTS recomendado) e npm
 
 ## Configuração
 
@@ -38,15 +39,35 @@ FRONT_PORT=80
 
 ## Executando a Aplicação
 
-Para construir as imagens e iniciar os containers, execute o comando abaixo na raiz do projeto:
+### 1. Backend e Banco de Dados (Docker)
+
+Para subir apenas o backend e o banco de dados via Docker, execute o comando abaixo na raiz do projeto:
 
 ```bash
 docker-compose up -d --build
 ```
 
+### 2. Frontend
+
+Para subir o front, basta rodar os seguintes comandos
+
+```bash
+cd front-app
+```
+
+```bash
+npm install
+```
+
+```bash
+npm run start
+```
+
+OBS: Foi otpado para rodar o front localmente por conta do mal funcionamento de uma lib usada no front.
+
 ## Acessando os Serviços
 
-- **Frontend:** http://localhost:80 (ou a porta definida em `FRONT_PORT`)
+- **Frontend:** http://localhost:4200
 - **Backend:** http://localhost:3000 (ou a porta definida em `APP_PORT`)
 - **Banco de Dados:** `localhost:5432` (acessível via ferramentas externas usando as credenciais do `.env`)
 

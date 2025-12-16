@@ -47,11 +47,22 @@
                             "node_modules/leaflet/dist/leaflet.css",
                             "node_modules/leaflet-draw/dist/leaflet.draw.css"
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "allowedCommonJsDependencies": [
+                            "lodash"
+                        ]
                     },
                     "configurations": {
                         "production": {
-                            "outputHashing": "all"
+                            "outputHashing": "all",
+                            "optimization": {
+                                "scripts": true,
+                                "styles": {
+                                    "minify": true,
+                                    "inlineCritical": false
+                                },
+                                "fonts": true
+                            }
                         },
                         "development": {
                             "optimization": false,

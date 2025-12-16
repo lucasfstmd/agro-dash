@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: terra_magna_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - terra_magna_network
+
+  back:
+    build: ./back-app
+    container_name: terra_magna_back
+    ports:
+      - "${APP_PORT}:3000"
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
+      PORT: 3000
+      MODE: ${MODE}
+      POSTGRES_SSL: ${POSTGRES_SSL}
+    depends_on:
+      - postgres
+    networks:
+      - terra_magna_network
+
+  front:
+    build: ./front-app
+    container_name: terra_magna_front
+    ports:
+      - "${FRONT_PORT:-80}:80"
+    networks:
+      - terra_magna_network
+
+volumes:
+  postgres_data:
+
+networks:
+  terra_magna_network:

@@ -32,14 +32,6 @@ services:
     networks:
       - terra_magna_network
 
-  front:
-    build: ./front-app
-    container_name: terra_magna_front
-    ports:
-      - "${FRONT_PORT:-80}:80"
-    networks:
-      - terra_magna_network
-
 volumes:
   postgres_data:
 
